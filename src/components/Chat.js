@@ -8,6 +8,7 @@ import ChatInput from "./ChatInput";
 import { db } from "../firebase";
 import Message from "./Message";
 import { LoginContainer, LoginInnerContainer } from "./Login";
+import EmptyMessageIcon from "../EmptyMessages.png";
 
 const Chat = () => {
   const chatRef = useRef(null);
@@ -47,19 +48,37 @@ const Chat = () => {
             </HeaderRight>
           </Header>
           <div>
-            {roomMessages?.docs.map((doc) => {
-              const { message, timeStamp, user, userImage } = doc.data();
-              console.log("userImage", userImage);
-              return (
-                <Message
-                  key={doc.id}
-                  message={message}
-                  timeStamp={timeStamp}
-                  user={user}
-                  userImage={userImage}
-                />
-              );
-            })}
+            {roomMessages?.docs?.length === 0 ? (
+              <LoginContainer style={{ backgroundColor: "transparent" }}>
+                <MessageInnerContainer
+                  style={{ backgroundColor: "transparent" }}
+                >
+                  <img
+                    src={EmptyMessageIcon}
+                    alt="no messages"
+                    style={{ height: "200px" }}
+                  />
+                  <h1>Welcome to {roomDetails?.data().name}</h1>
+                  <p>
+                    It looks empty here, why don't you start the conversation
+                  </p>
+                </MessageInnerContainer>
+              </LoginContainer>
+            ) : (
+              roomMessages?.docs.map((doc) => {
+                const { message, timeStamp, user, userImage } = doc.data();
+                console.log("userImage", userImage);
+                return (
+                  <Message
+                    key={doc.id}
+                    message={message}
+                    timeStamp={timeStamp}
+                    user={user}
+                    userImage={userImage}
+                  />
+                );
+              })
+            )}
             <ChatBottom ref={chatRef} />
           </div>
           <ChatInput

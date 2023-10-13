@@ -16,6 +16,7 @@ const Header = () => {
           src={user?.photoURL}
           alt={user?.displayName}
           onClick={() => auth.signOut()}
+          sizes="small"
         />
         <AccessTimeIcon />
       </HeaderLeft>
@@ -41,6 +42,7 @@ const HeaderContainer = styled.div`
   padding: 10px 0;
   background-color: var(--slack-color);
   color: white;
+  z-index: 1;
 `;
 
 const HeaderLeft = styled.div`

@@ -50,6 +50,15 @@ const Sidebar = () => {
           <SidebarOption key={doc.id} id={doc.id} title={doc.data().name} />
         );
       })}
+      <SlackLogo>
+        <img
+          src="https://static-00.iconduck.com/assets.00/slack-icon-2048x2048-5nfqoyso.png"
+          alt="logo"
+        />
+        <h4>
+          <strong>slack.com</strong>
+        </h4>
+      </SlackLogo>
     </SidebarContainer>
   );
 };
@@ -63,6 +72,7 @@ const SidebarContainer = styled.div`
   flex: 0.3;
   border-top: 1px solid #49274b;
   max-width: 260px;
+  position: relative;
 
   > hr {
     margin-top: 10px;
@@ -103,5 +113,22 @@ const SidebarInfo = styled.div`
       margin-top: 1px;
       margin-right: 2px;
     }
+  }
+`;
+
+const SlackLogo = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  > img {
+    height: 50px;
+  }
+
+  > h4 {
+    color: white;
   }
 `;
